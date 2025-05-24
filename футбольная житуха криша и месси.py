@@ -1,4 +1,5 @@
 import sys
+from random import randint
 
 import pygame
 import random
@@ -43,32 +44,41 @@ screen = pygame.display.set_mode(window_size)  # создание экрана(�
 pygame.display.set_caption("БАСУХА В ДЕЛЕ РОДНЫЕ")  # название окна
 backgound_color = (255, 255, 255)  # цвет
 clock = pygame.time.Clock()  # создание игровово таймера
-a=1280/5
-plate = Mich('ворота месси.png', 490, 0, 330, 98)
+q=1280/5
+vorota = Mich('ворота месси.png', 490, 0, 330, 98)
 fon = Mich("футбольное поле месси.jpg", 0, 0, 1280, 720)
-mich1 = Mich("мяч.png", a,  random.randint(720,2000), 128, 128)
-mich2 = Mich("мяч.png", 2*a, random.randint(720,2000),128 ,128)
-mich3 = Mich("мяч.png", 3*a, random.randint(720,2000), 128, 128)
-mich4 = Mich("мяч.png", 4*a, random.randint(720,2000), 128, 128)
-mich5 = Mich("мяч.png",5*a , random.randint(720,2000), 128, 128)
-mich_list = [mich1, mich2, mich3, mich4, mich5]
+mich1 = Mich("мяч.png", random.randint(0,6)*q,  random.randint(720,2000), 128, 128)
+mich2 = Mich("мяч.png", random.randint(0,6)*q, random.randint(720,2000),128 ,128)
+mich3 = Mich("мяч.png", random.randint(0,6)*q, random.randint(720,2000), 128, 128)
+mich4 = Mich("мяч.png", random.randint(0,6)*q, random.randint(720,2000), 128, 128)
+mich5 = Mich("мяч.png",random.randint(0,6)*q , random.randint(720,2000), 128, 128)
+mich6 = Mich("мяч.png", random.randint(0,6)*q,  random.randint(720,2000), 128, 128)
+mich7 = Mich("мяч.png", random.randint(0,6)*q, random.randint(720,2000),128 ,128)
+mich8 = Mich("мяч.png", random.randint(0,6)*q,  random.randint(720,2000), 128, 128)
+mich_list = [mich1, mich2, mich3, mich4, mich5,mich6,mich7,mich8]
 while True:  # игрововй таймер
     clock.tick(40)  # частота обновления таймераааааа
     fon.draw_image()
-    text = font.render("СЧЁТ "+str(egrok), True, (0, 0, 255))
+    text = font.render("СЧЁТ "+str(egrok)+":"+str(protivnik), True, (0, 0, 255))
 
     screen.blit(text,(50,50))
 
+    if egrok>=25:
+        fon = Mich("криштиану роналду.jpeg", 0, 0, 1280, 720)
+    elif protivnik>=25:
+        fon = Mich("месси фото.jpg", 0, 0, 1280, 720)
+    if egrok>=25 and protivnik>=25:
+        fon = Mich("друзья навсегда.jpg", 0, 0, 1280, 720)
     for i in mich_list:
         i.draw_image()
         i.move_mich()
-        if plate.rect.colliderect(i.rect) == True:
+        if vorota.rect.colliderect(i.rect) == True:
             i.rect.y=720
             egrok+=1
-        if plate.rect.y <= 0:
+        if i.rect.y <= 0:
             protivnik +=1
-    plate.draw_image()
-    plate.move_vorota(speed)
+    vorota.draw_image()
+    vorota.move_vorota(speed)
 
 
     for event in pygame.event.get():  # проходимся по событиям
